@@ -8,7 +8,8 @@
       "collection2": {},
       "simple-schema": {},
       "collection-helpers": {},
-      "migrations": {}
+      "migrations": {},
+      "accounts-ui-bootstrap-3": {}
     },
     "packages": {
       "iron-router": {
@@ -45,6 +46,11 @@
         "git": "https://github.com/rantav/meteor-migrations.git",
         "tag": "v0.0.2",
         "commit": "4e75c06b8e94961567765c4dea20a007816ad274"
+      },
+      "accounts-ui-bootstrap-3": {
+        "git": "https://github.com/mangasocial/meteor-accounts-ui-bootstrap-3.git",
+        "tag": "v0.3.0-1",
+        "commit": "93ffa5d0e325dc7026de89f6d90c178fa04bdd3a"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

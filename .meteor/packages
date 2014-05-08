@@ -2,9 +2,9 @@ standard-app-packages
 iron-router
 less
 bootstrap3-less
-accounts-ui
 accounts-password
 accounts-facebook
 accounts-github
 accounts-twitter
 migrations
+accounts-ui-bootstrap-3

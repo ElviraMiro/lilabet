@@ -6,6 +6,7 @@
     "collection2": {},
     "simple-schema": {},
     "collection-helpers": {},
-    "migrations": {}
+    "migrations": {},
+    "accounts-ui-bootstrap-3": {}
   }
 }
