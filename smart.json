@@ -4,9 +4,7 @@
     "bootstrap3-less": {},
     "collectionFS": {},
     "collection2": {},
-    "simple-schema": {},
     "collection-helpers": {},
-    "migrations": {},
-    "accounts-ui-bootstrap-3": {}
+    "migrations": {}
   }
 }

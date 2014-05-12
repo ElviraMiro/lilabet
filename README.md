@@ -16,21 +16,71 @@ smart.json
     "bootstrap3-less": {},
     "collectionFS": {},
     "collection2": {},
-    "simple-schema": {},
     "collection-helpers": {}
   }
 }
 
-mrt update
-
 mrt add:
-accounts-ui-bootstrap-3
+simple-schema
+accounts-ui
 accounts-password
-accounts-facebook
-accounts-github
-accounts-google
-accounts-twitter
 migrations
 
+mrt update
 
+
+Структура данных:
+
+lib/geography.js
+Countries:
+Страны мира
+	- title
+
+Cities:
+Города
+	- title
+	- countryId
+
+lib/sports.js
+Sports:
+Виды спорта
+	- title
+
+Teams:
+Команды
+	- title
+	- sportId
+	- cityId
+	- countryId
+
+
+Tournaments:
+Турниры
+	- title
+	- sportId
+	- countryId
+
+Games:
+Игры
+	- tournamentId
+	- sportId
+	- dateOf
+	- countryId
+	- cityId
+	- prediction
+	- teamId1
+	- teamId2
+
+lib/posts.js
+Posts:
+Статьи
+	- title
+	- content
+	- authorId
+	- createdAt
+	- sportId
+	- tournamentId
+	- gameId
+	- gameDate
+	- tags
 
