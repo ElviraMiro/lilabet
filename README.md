@@ -9,22 +9,23 @@ yo meteor
 
 [?] Shall we include Bootstrap with LESS? Yes
 
-smart.json
-{
-  "packages": {
-    "iron-router": {},
-    "bootstrap3-less": {},
-    "collectionFS": {},
-    "collection2": {},
-    "collection-helpers": {}
-  }
-}
-
 mrt add:
 simple-schema
 accounts-ui
 accounts-password
 migrations
+
+smart.json
+{
+  "packages": {
+    "iron-router": {},
+    "bootstrap3-less": {},
+    "accounts-ui-bootstrap-3": {},
+    "collectionFS": {},
+    "collection2": {},
+    "collection-helpers": {}
+  }
+}
 
 mrt update
 
@@ -84,3 +85,8 @@ Posts:
 	- gameDate
 	- tags
 
+client/routes.js
+Add route for administrate
+
+client/views/admin.html
+client/views/admin.js

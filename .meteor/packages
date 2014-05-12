@@ -3,6 +3,6 @@ iron-router
 less
 bootstrap3-less
 migrations
-accounts-ui
-accounts-password
 simple-schema
+accounts-ui-bootstrap-3
+accounts-password

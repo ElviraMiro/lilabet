@@ -1,0 +1,40 @@
+<template name="admin">
+  {{> adminNavigation}}
+  <div class="container">
+    {{#if isAdmin}}
+      <ul class="nav nav-tabs" id="admin">
+        <li><a href="#" class="geography" data-toggle="tab"><i class="fa fa-qrcode"></i> Geography</a></li>
+        <li><a href="#" class="sports" data-toggle="tab"><i class="fa fa-user"></i> Sports</a></li>
+        <li><a href="#" class="posts" data-toggle="tab"><i class="fa fa-tags"></i> Posts</a></li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane" id="geography">geography</div>
+        <div class="tab-pane" id="sports">sports</div>
+        <div class="tab-pane" id="posts">posts</div>
+      </div>
+    {{/if}}
+  </div>
+</template>
+
+<template name="adminNavigation">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Lilabet.eu</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          {{> loginButtons }}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</template>
