@@ -14,6 +14,7 @@ simple-schema
 accounts-ui
 accounts-password
 migrations
+fontawesome4
 
 smart.json
 {
@@ -84,6 +85,9 @@ Posts:
 	- gameId
 	- gameDate
 	- tags
+
+
+http://getbootstrap.com/
 
 client/routes.js
 Add route for administrate

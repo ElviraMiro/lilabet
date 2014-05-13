@@ -8,7 +8,8 @@
       "collectionFS": {},
       "collection2": {},
       "collection-helpers": {},
-      "migrations": {}
+      "migrations": {},
+      "fontawesome4": {}
     },
     "packages": {
       "iron-router": {
@@ -45,6 +46,11 @@
         "git": "https://github.com/rantav/meteor-migrations.git",
         "tag": "v0.0.2",
         "commit": "4e75c06b8e94961567765c4dea20a007816ad274"
+      },
+      "fontawesome4": {
+        "git": "https://github.com/chrismbeckett/meteor-fontawesome4.git",
+        "tag": "v1.0.0",
+        "commit": "fe38ec775e974f0f7855d1693dc74fd4f1b4848c"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

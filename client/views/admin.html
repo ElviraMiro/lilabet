@@ -1,20 +1,10 @@
 <template name="admin">
   {{> adminNavigation}}
-  <div class="container">
-    {{#if isAdmin}}
-      <ul class="nav nav-tabs" id="admin">
-        <li><a href="#" class="geography" data-toggle="tab"><i class="fa fa-qrcode"></i> Geography</a></li>
-        <li><a href="#" class="sports" data-toggle="tab"><i class="fa fa-user"></i> Sports</a></li>
-        <li><a href="#" class="posts" data-toggle="tab"><i class="fa fa-tags"></i> Posts</a></li>
-      </ul>
-      <!-- Tab panes -->
-      <div class="tab-content">
-        <div class="tab-pane" id="geography">geography</div>
-        <div class="tab-pane" id="sports">sports</div>
-        <div class="tab-pane" id="posts">posts</div>
-      </div>
-    {{/if}}
-  </div>
+  {{#if isAdmin}}
+    <div class="container-fluid">
+      {{> adminPanel}}
+    </div>
+  {{/if}}
 </template>
 
 <template name="adminNavigation">
@@ -37,4 +27,119 @@
       </div>
     </div>
   </nav>
+</template>
+
+<template name="adminPanel">
+  <ul class="nav nav-tabs" id="adminTab">
+    <li class="active"><a href="#geography" data-toggle="tab"><i class="fa fa-globe"></i> Geography</a></li>
+    <li><a href="#sports" data-toggle="tab"><i class="fa fa-trophy"></i> Sports</a></li>
+    <li><a href="#tournaments" data-toggle="tab"><i class="fa fa-calendar"></i> Tournaments</a></li>
+    <li><a href="#posts" data-toggle="tab"><i class="fa fa-bullhorn"></i> Posts</a></li>
+  </ul>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane active" id="geography">
+      {{> adminGeographyPanel}}
+    </div>
+    <div class="tab-pane" id="sports">
+      sports
+    </div>
+    <div class="tab-pane" id="tournaments">
+      sports
+    </div>
+    <div class="tab-pane" id="posts">
+      posts
+    </div>
+  </div>
+</template>
+
+<template name="adminGeographyPanel">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="panel-title">Countries</div><br>
+              <div class="input-group">
+                <input type="text" class="form-control" id="newCountryTitle" placeholder="Enter title of new country">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button" id="addCountry"><i class="fa fa-plus"></i></button>
+                </span>
+              </div>
+            </div>
+            <div class="panel-body">
+              {{#if countries}}
+                <table class="table table-condensed">
+                  {{#each countries}}
+                    <tr class="countryRow" id="{{_id}}">
+                      <td>
+                        <div class="radio">
+                          <label>
+                            <input type="radio" name="countries" class="selCountry" value="{{_id}}">
+                          </label>
+                        </div>
+                      </td>
+                      <td>
+                        {{title}}
+                      </td>
+                      <td>
+                        <button class="btn btn-danger removeCountry"><i class="fa fa-trash-o"></i></button>
+                      </td>
+                    </tr>
+                  {{/each}}
+                </table>
+              {{else}}
+                No countries in database
+              {{/if}}
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          {{#if selectedCountry}}
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="panel-title">
+                  Cities of {{selectedCountry.title}}
+                </div><br>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="newCityTitle" placeholder="Enter title of new city">
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" id="addCity"><i class="fa fa-plus"></i></button>
+                  </span>
+                </div>
+              </div>
+              <div class="panel-body">
+                {{#if cities}}
+                  <table class="table table-condensed">
+                    {{#each cities}}
+                      <tr class="cityRow" id="{{_id}}">
+                        <td>
+                          <div class="radio">
+                            <label>
+                              <input type="radio" name="cities" class="selCity" value="{{_id}}">
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          {{title}}
+                        </td>
+                        <td>
+                          <button class="btn btn-danger removeCity"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                      </tr>
+                    {{/each}}
+                  </table>
+                {{else}}
+                  No cities in database
+                {{/if}}
+              </div>
+            </div>
+          {{else}}
+            No selected country
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
