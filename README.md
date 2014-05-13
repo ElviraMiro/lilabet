@@ -91,6 +91,6 @@ http://getbootstrap.com/
 
 client/routes.js
 Add route for administrate
-
+Need add pusblish on server, add right for change, subscribe on client (countries and cities)
 client/views/admin.html
 client/views/admin.js
