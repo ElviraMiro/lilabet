@@ -13,8 +13,6 @@ mrt add:
 simple-schema
 accounts-ui
 accounts-password
-migrations
-fontawesome4
 
 smart.json
 {
@@ -24,7 +22,10 @@ smart.json
     "accounts-ui-bootstrap-3": {},
     "collectionFS": {},
     "collection2": {},
-    "collection-helpers": {}
+    "collection-helpers": {},
+    "migrations": {},
+	"fontawesome4": {}
+
   }
 }
 
@@ -88,9 +89,12 @@ Posts:
 
 
 http://getbootstrap.com/
+ckeditor.com
 
 client/routes.js
 Add route for administrate
 Need add pusblish on server, add right for change, subscribe on client (countries and cities)
 client/views/admin.html
 client/views/admin.js
+
+Add autoform

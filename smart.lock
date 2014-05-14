@@ -9,7 +9,8 @@
       "collection2": {},
       "collection-helpers": {},
       "migrations": {},
-      "fontawesome4": {}
+      "fontawesome4": {},
+      "autoform": {}
     },
     "packages": {
       "iron-router": {
@@ -39,8 +40,8 @@
       },
       "collection-helpers": {
         "git": "https://github.com/dburles/meteor-collection-helpers.git",
-        "tag": "v0.2.7",
-        "commit": "e25135fa1d70bd93763ac52a2b0a223b03cb7310"
+        "tag": "v0.2.8",
+        "commit": "df94190a26414f20aed2dac4228cb3fd5487c5fc"
       },
       "migrations": {
         "git": "https://github.com/rantav/meteor-migrations.git",
@@ -51,6 +52,11 @@
         "git": "https://github.com/chrismbeckett/meteor-fontawesome4.git",
         "tag": "v1.0.0",
         "commit": "fe38ec775e974f0f7855d1693dc74fd4f1b4848c"
+      },
+      "autoform": {
+        "git": "https://github.com/aldeed/meteor-autoform.git",
+        "tag": "v0.8.1",
+        "commit": "385051a5e4bbea3b2a54965800f5f530987ef432"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
@@ -94,8 +100,13 @@
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.4.0",
-        "commit": "2cc6aac0d35a4e00b065c1437d540b2aefba5241"
+        "tag": "v0.5.0",
+        "commit": "c90127c383ad829747502bf7f6dfb6aabae094b8"
+      },
+      "moment": {
+        "git": "https://github.com/acreeger/meteor-moment.git",
+        "tag": "v2.6.0",
+        "commit": "26156df681750fd6e6ed77043eef32b6653ebbdf"
       },
       "cfs-filesaver": {
         "git": "https://github.com/CollectionFS/Meteor-cfs-filesaver.git",

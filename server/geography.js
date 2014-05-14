@@ -4,6 +4,7 @@ Meteor.publish('countries', function() {
 
 Countries.allow({
 	insert: function(userId, doc) {
+		return true;
 		var user = Meteor.users.findOne({_id: userId});
 		if (user.isAdmin) {
 			return true;
@@ -12,6 +13,7 @@ Countries.allow({
 		}
 	},
 	update: function(userId, doc) {
+		return true;
 		var user = Meteor.users.findOne({_id: userId});
 		if (user.isAdmin) {
 			return true;
@@ -20,6 +22,7 @@ Countries.allow({
 		}
 	},
 	remove: function(userId, doc) {
+		return true;
 		var user = Meteor.users.findOne({_id: userId});
 		if (user.isAdmin) {
 			return true;
@@ -35,6 +38,7 @@ Meteor.publish('cities', function() {
 
 Cities.allow({
 	insert: function(userId, doc) {
+		return true;
 		var user = Meteor.users.findOne({_id: userId});
 		if (user.isAdmin) {
 			return true;
@@ -43,6 +47,7 @@ Cities.allow({
 		}
 	},
 	update: function(userId, doc) {
+		return true;
 		var user = Meteor.users.findOne({_id: userId});
 		if (user.isAdmin) {
 			return true;
@@ -51,6 +56,7 @@ Cities.allow({
 		}
 	},
 	remove: function(userId, doc) {
+		return true;
 		var user = Meteor.users.findOne({_id: userId});
 		if (user.isAdmin) {
 			return true;
