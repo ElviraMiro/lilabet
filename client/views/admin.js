@@ -69,6 +69,9 @@ Template.adminSportsPanel.helpers({
   'addSport': function() {
     return Session.get('addSport');
   },
+  'addTeam': function() {
+    return Session.get('addTeam');
+  },
   'sports': function() {
     return Sports.find({},{sort: {title: 1}});
   },
@@ -103,6 +106,15 @@ Template.adminSportsPanel.events({
   },
   'click .selSport': function(e, t) {
     Session.set("selectedSportTypeId", this._id);
+  }
+});
+
+Template.adminAddTeam.helpers({
+  'sports': function() {
+    return Sports.find({}, {sort: {title: 1}});
+  },
+  'countries': function() {
+    return Countries.find({}, {sort: {title: 1}});
   }
 });
 

@@ -39,16 +39,16 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div class="tab-pane active" id="geography">
-      {{> adminGeographyPanel}}
+      
     </div>
     <div class="tab-pane" id="sports">
-      {{> adminSportsPanel}}
+      
     </div>
     <div class="tab-pane" id="tournaments">
       sports
     </div>
     <div class="tab-pane" id="posts">
-      {{> adminPostsPanel}}
+      
     </div>
   </div>
 </template>
@@ -216,7 +216,7 @@
 </template>
 
 <template name="adminAddTeam">
-  {{#autoform collection="Teams" id="addTeam" type="insert"}}
+  {{#autoForm schema="TeamSchema" id="addTeam" type="insert"}}
     <div class="panel panel-default">
       <div class="panel-body">
         {{> afQuickField name="title"}}
@@ -227,7 +227,7 @@
         <button type="submit" class="btn btn-primary">Insert</button>
       </div>
     </div>
-  {{/autoform}}
+  {{/autoForm}}
 </template>
 
 <template name="adminPostsPanel">
