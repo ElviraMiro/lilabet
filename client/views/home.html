@@ -1,7 +1,12 @@
 <template name="home">
   {{> homeNavigation}}
   <div class="container-fluid">
-    Тут будут посты с навигацией
+    <div class="row">
+      <div class="col-xs-12">
+        {{> postsList}}
+      </div>
+      
+    </div>
   </div>
 </template>
 
@@ -25,4 +30,37 @@
       </div>
     </div>
   </nav>
+</template>
+
+<template name="postsList">
+  <table class="table table-condensed table-striped">
+    {{#each posts}}
+      <tr>
+        <td class="bg-primary">
+          <div class="panel-title" style="margin:10px">
+            <div class="row">
+              <div class="col-xs-9">
+                {{momentGameDate}}
+                <h2>{{title}}</h2>
+              </div>
+              <div class="col-xs-3">
+                <div style="text-align:right">
+                  {{#each tags}}
+                    <span class="badge" style="background-color: #fff;color: #0B610B;">{{title}}</span>
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          {{#if content}}
+            {{{content}}}
+          {{/if}}
+        </td>
+      </tr>
+    {{/each}}
+  </table>
 </template>

@@ -21,6 +21,13 @@
         <a class="navbar-brand" href="/">Lilabet.eu</a>
       </div>
       <div class="navbar-collapse collapse">
+        {{#if isAdmin}}
+          <ul class="nav navbar-nav">
+            {{#unless addPost}}
+              <li><a href="#" class="newPost">Add new post</a></li>
+            {{/unless}}
+          </ul>
+        {{/if}}
         <ul class="nav navbar-nav navbar-right">
           {{> loginButtons }}
         </ul>
@@ -30,227 +37,183 @@
 </template>
 
 <template name="adminPanel">
-  <ul class="nav nav-tabs" id="adminTab">
-    <li class="active"><a href="#geography" data-toggle="tab"><i class="fa fa-globe"></i> Geography</a></li>
-    <li><a href="#sports" data-toggle="tab"><i class="fa fa-trophy"></i> Sports</a></li>
-    <li><a href="#tournaments" data-toggle="tab"><i class="fa fa-calendar"></i> Tournaments</a></li>
-    <li><a href="#posts" data-toggle="tab"><i class="fa fa-bullhorn"></i> Posts</a></li>
-  </ul>
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div class="tab-pane active" id="geography">
-      
-    </div>
-    <div class="tab-pane" id="sports">
-      
-    </div>
-    <div class="tab-pane" id="tournaments">
-      sports
-    </div>
-    <div class="tab-pane" id="posts">
-      
-    </div>
-  </div>
-</template>
-
-<template name="adminGeographyPanel">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-xs-6">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <div class="panel-title">Countries</div><br>
-              <div class="input-group">
-                <input type="text" class="form-control" id="newCountryTitle" placeholder="Enter title of new country">
-                <span class="input-group-btn">
-                  <button class="btn btn-primary" type="button" id="addCountry"><i class="fa fa-plus"></i></button>
-                </span>
+  {{#if addPost}}
+    {{> editPostPanel}}
+  {{else}}
+    {{#if editPost}}
+      {{> editPostPanel}}
+    {{else}}
+      <table class="table table-condensed table-striped">
+        {{#each posts}}
+          <tr>
+            <td width="50px" valign="top">
+              <div class="btn-group-vertical" style="margin-top:5px;">
+                <button type="button" class="btn btn-primary edit"><i class="fa fa-pencil"></i></button>
+                <button type="button" class="btn btn-danger delete"><i class="fa fa-trash-o"></i></button>
               </div>
-            </div>
-            <div class="panel-body">
-              {{#if countries}}
-                <table class="table table-condensed">
-                  {{#each countries}}
-                    <tr class="countryRow" id="{{_id}}">
-                      <td>
-                        <div class="radio">
-                          <label>
-                            <input type="radio" name="countries" class="selCountry" value="{{_id}}">
-                          </label>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="input-group">
-                          <input type="text" class="form-control country{{_id}}" value="{{title}}">
-                          <span class="input-group-btn">
-                            <button class="btn btn-info editCountry" type="button"><i class="fa fa-edit"></i></button>
-                            <button class="btn btn-danger removeCountry" type="button"><i class="fa fa-trash-o"></i></button>
-                          </span>
-                        </div>
-                      </td>
-                    </tr>
-                  {{/each}}
-                </table>
-              {{else}}
-                No countries in database
-              {{/if}}
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6">
-          {{#if selectedCountry}}
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <div class="panel-title">
-                  Cities of {{selectedCountry.title}}
-                </div><br>
-                <div class="input-group">
-                  <input type="text" class="form-control" id="newCityTitle" placeholder="Enter title of new city">
-                  <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button" id="addCity"><i class="fa fa-plus"></i></button>
-                  </span>
+              <br><br>
+            </td>
+            <td>
+              <div class="panel-title">
+                {{title}} - {{momentGameDate}}
+                <div class="pull-right">
+                  {{#if isTrueSet}}
+                    Set result: 
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success isTrue"><i class="fa fa-check"></i> Right</button>
+                      <button type="button" class="btn btn-warning notTrue"><i class="fa fa-times"></i> Wrong</button>
+                    </div>
+                  {{else}}
+                    {{#if isTrue}}
+                      Result: RIGHT
+                    {{else}}
+                      Result: WRONG
+                    {{/if}}
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-danger eraseTrue"><i class="fa fa-eraser"></i> Erase</button>
+                    </div>
+                  {{/if}}
                 </div>
               </div>
-              <div class="panel-body">
-                {{#if cities}}
-                  <table class="table table-condensed">
-                    {{#each cities}}
-                      <tr class="cityRow" id="{{_id}}">
-                        <td>
-                          <div class="input-group">
-                            <input type="text" class="form-control city{{_id}}" value="{{title}}">
-                            <span class="input-group-btn">
-                              <button class="btn btn-info editCity" type="button"><i class="fa fa-edit"></i></button>
-                              <button class="btn btn-danger removeCity" type="button"><i class="fa fa-trash-o"></i></button>
-                            </span>
-                          </div>
-                        </td>
-                      </tr>
-                    {{/each}}
-                  </table>
-                {{else}}
-                  No cities in database
-                {{/if}}
-              </div>
-            </div>
-          {{else}}
-            No selected country
-          {{/if}}
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
-<template name="adminSportsPanel">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-xs-4">
-          <div class="well">
-            <button class="btn btn-primary addSport">
-              <i class="fa fa-plus"></i> Add sport's type
-            </button>
-            <button class="btn btn-primary addTeam" {{disabledTeam}}>
-              <i class="fa fa-plus"></i> Add sport's team
-            </button>
-          </div>
-          <div class="btn-group-vertical" style="width:100%">
-            {{#each sports}}
-              <button class="btn {{btnSport}} selSport" style="width:100%">{{title}}</button>
-            {{/each}}
-          </div>
-        </div>
-        <div class="col-xs-8">
-          {{#if addSport}}
-            {{> adminEditSport}}
-          {{else}}
-            {{#if addTeam}}
-              {{> adminAddTeam}}
-            {{else}}
-              {{#if selectedSportTypeId}}
-                {{> adminTeamsTable}}
+              <hr>
+              {{#if content}}
+                {{{content}}}
               {{else}}
-                <h4>Please, select sport's type in left menu</h4>
+                In archive
               {{/if}}
-            {{/if}}
-          {{/if}}
+              <hr>
+            </td>
+          </tr>
+        {{/each}}
+      </table>
+    {{/if}}
+  {{/if}}
+  <div class="modal fade" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close notSureDelete" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Delete post</h4>
+        </div>
+        <div class="modal-body">
+          Are you sure deleting selected post?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default notSureDelete">Close</button>
+          <button type="button" class="btn btn-primary" id="sureDelete"> <i class="fa fa-trash-o"></i> Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="addTagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close notTag" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Select tags</h4>
+        </div>
+        <div class="modal-body">
+          <p>Sports</p>
+          {{#each sporttags}}
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" class="selectedTag" id="{{_id}}"> {{title}}
+              </label>
+            </div>
+          {{/each}}
+          <div class="form-group">
+            <input type="text" class="form-control" id="sportTag" placeholder="tag1;tag2;tag3">
+          </div>
+          <hr>
+          <p>Tournaments</p>
+          {{#each tourtags}}
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" class="selectedTag" id="{{_id}}"> {{title}}
+              </label>
+            </div>
+          {{/each}}
+          <div class="form-group">
+            <input type="text" class="form-control" id="tourTag" placeholder="tag1;tag2;tag3">
+          </div>
+          <hr>
+          <p>Teams</p>
+          {{#each teamtags}}
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" class="selectedTag" id="{{_id}}"> {{title}}
+              </label>
+            </div>
+          {{/each}}
+          <div class="form-group">
+            <input type="text" class="form-control" id="teamTag" placeholder="tag1;tag2;tag3">
+          </div>
+          <hr>
+          <p>Others</p>
+          {{#each othertags}}
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" class="selectedTag" id="{{_id}}"> {{title}}
+              </label>
+            </div>
+          {{/each}}
+          <div class="form-group">
+            <input type="text" class="form-control" id="otherTag" placeholder="tag1;tag2;tag3">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default notTag">Close</button>
+          <button type="button" class="btn btn-primary" id="tags"> <i class="fa fa-check"></i> Select</button>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<template name="adminTeamsTable">
-  {{#if teams}}
-    <table class="table table-condensed">
-      {{#each teams}}
-        <tr>
-          <td>
-            {{title}}
-          </td>
-        </tr>
-      {{/each}}
-    </table>
-  {{else}}
-    <h4>No teams in database</h4>
-  {{/if}}
-</template>
-
-<template name="adminEditSport">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <div class="form-group">
-        <label for="newSportTitle">
-          New sport's type title
-        </label>
-        <input type="text" class="form-control" id="newSportTitle">
-      </div>
-    </div>
-    <div class="panel-footer">
-      <button class="btn btn-primary saveSport"><i class="fa fa-check"></i> Save</button>
-      <button class="btn btn-default cancelSport"><i class="fa fa-times"></i> Cancel</button>
-    </div>
-  </div>
-</template>
-
-<template name="adminAddTeam">
-  {{#autoForm schema="TeamSchema" id="addTeam" type="insert"}}
-    <div class="panel panel-default">
-      <div class="panel-body">
-        {{> afQuickField name="title"}}
-        {{> afQuickField name="sportId" options=sports}}
-        {{> afQuickField name="countryId" options=countries}}
-      </div>
-      <div class="panel-footer">
-        <button type="submit" class="btn btn-primary">Insert</button>
-      </div>
-    </div>
-  {{/autoForm}}
-</template>
-
-<template name="adminPostsPanel">
+<template name="editPostPanel">
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{#if newPost}}
-        <button type="button" class="btn btn-primary savePost"><i class="fa fa-check"></i> Save post</button>
-      {{else}}
-        <button type="button" class="btn btn-primary newPost"><i class="fa fa-plus"></i> New post</button>
-      {{/if}}
+      <div class="panel-title">
+        {{#unless post}}
+          Add new post
+        {{else}}
+          Edit post
+        {{/unless}}
+      </div>
     </div>
     <div class="panel-body">
-      {{#if newPost}}
-        {{> editPost}}
-      {{else}}
-      {{/if}}
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label for="inputTitle">Post's title</label>
+            <input type="text" class="form-control" id="inputTitle" value="{{post.title}}">
+          </div>
+          <label>Game's date</label>
+          <div id="datetimepicker" class="input-append date input-group">
+            <input type="text" id="gameDate" class="form-control" value="{{gameDate}}">
+            <span class="add-on input-group-addon">
+              <i data-time-icon="fa fa-clock-o" data-date-icon="fa fa-calendar"></i>
+            </span>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="well">
+            {{#each tags}}
+              <span class="badge deleteTag" style="color: #fff;background-color: {{colorTag}};">{{title}} <i class="fa fa-times"></i></span>
+            {{/each}}
+            <span class="badge addTag" style="color: #fff;background-color: #428bca;"><i class="fa fa-plus"></i> Add tag</span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <label>Post's content</label>
+      <textarea class="editable form-control">
+        {{post.content}}
+      </textarea>
+    </div>
+    <div class="panel-footer">
+      <button class="btn btn-primary addPost"> Save</button>
+      <button class="btn btn-default cancel"> Cancel</button>
     </div>
   </div>
-</template>
-
-<template name="editPost">
-
-  <textarea class="editable">
-    Insert your own text
-  </textarea>
 </template>

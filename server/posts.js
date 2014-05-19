@@ -1,5 +1,5 @@
 Meteor.publish('postsForStatistics', function() {
-  return Posts.find({isTrue: {$ne: null}}, {fields: {tags: 1, isTrue: 1}});
+  return Posts.find({isTrue: {$ne: null}}, {fields: {title: 1, tags: 1, isTrue: 1}});
 });
 
 Meteor.publish('workingPosts', function() {

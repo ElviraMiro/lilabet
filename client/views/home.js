@@ -1,11 +1,12 @@
-Template.home.helpers({
-  myAppVariable: function() {
-    return Session.get('myAppVariable');
-  }
-});
-
-Template.home.events({
-  'click button': function(event, template) {
-    Session.set('myAppVariable', Math.floor(Math.random() * 11));
+Template.postsList.helpers({
+  'posts': function() {
+    return Posts.find({isTrue: null}, {sort: {gameDate: 1}});
+  },
+  'momentGameDate': function() {
+    return moment(this.gameDate).format("DD-MM-YYYY H:mm");
+  },
+  'tags': function() {
+  	var tags = this.tags;
+  	return Tags.find({title: {$in: tags}});
   }
 });

@@ -134,3 +134,31 @@ Posts
 
 	yo meteor:view admin
 
+И, да, нам же придется работать с датой матча - поэтому рекомендую для фронтенда использовать http://tarruda.github.io/bootstrap-datetimepicker/
+
+Добавить соответственно две строчки в layout.html
+
+	<link rel="stylesheet" type="text/css" media="screen" href="bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+	<script type="text/javascript" src="ootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+Также есть смысл добавить библиотеку для парсинга, валидации и манипуляций с датами:
+	
+	mrt add moment
+
+Разместим на административной странице сверху панель навигации - шаблон adminNavigation
+
+Необходимо для редактирования поля с содержанием поста указать использование ckeditor, а для поля с датой и временем игры - использование datetimepicker. Это делается по окончанию рендеринга шаблона editPostPanel 
+
+	Template.editPostPanel.rendered = function() {
+		$( 'textarea.editable' ).ckeditor();
+		$('#datetimepicker').datetimepicker({
+			format: 'dd-MM-yyyy hh:mm'
+		});
+	};
+
+Для того, чтобы мой аккаунт стал административным в серверной части при старте впишем следующую команду (файл server/server.js):
+
+	Meteor.startup(function () {
+		Meteor.users.update({"emails.address": "karashistka@yandex.ru"}, {$set: {isAdmin: true}});
+	});
+

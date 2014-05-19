@@ -1,3 +1,3 @@
 Meteor.subscribe('postsForStatistics');
-Meteor.subscribe('workingPost');
+Meteor.subscribe('workingPosts');
 Meteor.subscribe('tags');
