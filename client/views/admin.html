@@ -1,6 +1,6 @@
 <template name="admin">
   {{> adminNavigation}}
-  {{#if isAdmin}}
+  {{#if isUserAdmin}}
     <div class="container-fluid">
       {{> adminPanel}}
     </div>
@@ -21,7 +21,7 @@
         <a class="navbar-brand" href="/">Lilabet.eu</a>
       </div>
       <div class="navbar-collapse collapse">
-        {{#if isAdmin}}
+        {{#if isUserAdmin}}
           <ul class="nav navbar-nav">
             {{#unless addPost}}
               <li><a href="#" class="newPost">Add new post</a></li>

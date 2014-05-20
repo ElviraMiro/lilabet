@@ -4,13 +4,8 @@ Session.set("deletingPost", null);
 Session.set("addTags", []);
 
 Template.admin.helpers({
-  isAdmin: function() {
-  	if (Meteor.user()) {
-  		if (Meteor.user().isAdmin) {
-  			return true;
-  		}
-  	}
-    return true;//false;
+  isUserAdmin: function() {
+  	return isUserAdmin(Meteor.userId());
   }
 });
 
@@ -18,8 +13,8 @@ Template.adminNavigation.helpers({
   'addPost': function() {
     return Session.get("addPost");
   },
-  'isAdmin': function() {
-    return Template.admin.isAdmin;
+  'isUserAdmin': function() {
+    return isUserAdmin(Meteor.userId());
   }
 })
 
