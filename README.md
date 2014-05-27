@@ -110,6 +110,46 @@ TagSchema = new SimpleSchema({
 Tags = new Meteor.Collection("tags", {schema: TagSchema});
 ```
 
+Также в этом файле необходимо определить условия разрешения на изменения данных в базе:
+
+```
+Tags.allow({
+	insert: function(userId, doc) {
+		return isUserAdmin(userId);
+	},
+	update: function(userId, doc, fields, modifier) {
+		return isUserAdmin(userId);
+	},
+	remove: function(userId, doc) {
+		if (isUserAdmin(userId)) {
+			var posts = Posts.find({tags: doc.title}).fetch();
+			if (posts.length > 0) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+		}
+	}
+});
+```
+
+В нашем случае работу с коллекцией Tags будет осуществлять только администратор. Для оптимизации кода для проверки является ли пользователь администратором напишем функцию:
+
+Файл: **lib/helpers/users.js**
+
+```
+isUserAdmin = function(uid) {
+	var user = Meteor.users.findOne(uid);
+	if (user && user.isAdmin) {
+		return true;
+	} else {
+		return false;
+	}
+};
+```
+
 * server
 
 *Описание структуры публикации данных со стороны сервера*. Это позволяет нам не отправлять на клиент всю базу данных, а определять куски информации, которые могут быть необходимы пользователю в каждый конкретный момент.
@@ -122,7 +162,7 @@ Meteor.publish('tags', function() {
 
 При необходимости как-то ограничить данные - изменяется запрос к коллекции, который возвращается.
 
-* client\lib
+* client/lib
 
 *Подключение данных с сервера в локальную базу клиента*.
 
@@ -130,75 +170,6 @@ Meteor.publish('tags', function() {
 Meteor.subscribe('tags');
 ```
 
-
-
-Коллекция Tags
-
-Содержит возможные теги, присваиваемые контентщиком прогнозу, по которым и будет осуществляться поиск прогноза, а также вывод статистики
-
-	- title - string
-	- tagType - number
-		возможные варианты:
-		0 - sport,
-		1 - tournament,
-		2 - team,
-		3 - other
-
-Коллекция Posts
-
-Содержит посты
-
-	- title - string
-	- content - string
-	- tags - [string] - массив тегов
-	- gameDate - date
-	- isTrue - boolean (выставляется после игры, если прогноз оправдался)
-
-Теперь нам необходимо добавить кое-какие пакеты для работы с проектом.
-
-В первую очередь добавим стандартный пакет для облегчения работы с пользователями:
-
-	mrt add accounts-ui
-	mrt add accounts-password
-
-Для описывания схем коллекций:
-
-	mrt add simple-schema
-
-Для красивых шрифтовых иконок:
-
-	mrt add fontawesome4
-
-Ну и напоследок:
-
-	mrt update
-
-Начнем с описания схем данных.
-
-Три последовательных шага для описания работы с коллекциями базы данных:
-
-1-й шаг. Это собственно описание структуры данных и установление связи переменных с коллекциями MongoDB - файлы, лежащие в папке lib нашего проекта
-
-В нашем случае структура простая, поэтому создадим один файл, где будут описываться все три коллекции данных, файл - lib/posts.js
-
-Пример описания структуры коллекции:
-	
-	TagSchema = new SimpleSchema({
-		title: {
-			type: String,
-			label: "Title",
-			max: 100
-		},
-		tagType: {
-			// 0 - sport, 1 - tournament, 2 - team, 3 - other
-			type: Number,
-			label: "Tag's type"
-		}
-	});
-
-И собственно, связь переменной с коллекцией базы данных:
-
-	Tags = new Meteor.Collection("tags", {schema: TagSchema});
 
 Плюс в этом шаге я еще и определяю при каких условиях могут изменяться данные в базе - в нашем случае - у пользователя должен стоять флаг isAdmin
 
